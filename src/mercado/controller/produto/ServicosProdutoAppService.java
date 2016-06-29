@@ -1,4 +1,4 @@
-package mercado.controller;
+package mercado.controller.produto;
 
 import mercado.entidade.Produto;
 import mercado.model.EstoqueRepository;
