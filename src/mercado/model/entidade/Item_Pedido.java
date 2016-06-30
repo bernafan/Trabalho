@@ -1,10 +1,10 @@
-package mercado.entidade;
+package mercado.model.entidade;
 
 
 public class Item_Pedido {
 	private Produto produto;
-    private int qtdprodutos;
-    private double pesoProduto;
+        private int qtdprodutos;
+        private double pesoProduto;
     
 	public Produto getProduto() {
 		return produto;

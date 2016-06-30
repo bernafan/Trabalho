@@ -1,7 +1,7 @@
-package mercado.controller;
+package mercado.controller.pedido;
 
-import mercado.entidade.Item_Pedido;
-import mercado.entidade.Pedido;
+//import mercado.model.entidade.Item_Pedido;
+//import mercado.model.entidade.Pedido;
 
 public class ServicoPedidoAppServico {
 	

@@ -1,4 +1,4 @@
-package mercado.entidade;
+package mercado.model.entidade;
 
 public class Cliente {
 	public String nome;

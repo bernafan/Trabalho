@@ -1,7 +1,7 @@
-package mercado.controller;
+package mercado.controller.funcionario;
 
-import mercado.entidade.Funcionario;
-import mercado.model.FuncionariosRepository;
+import mercado.model.entidade.Funcionario;
+import mercado.model.repositories.FuncionariosRepository;
 
 public class ServicoFuncionarioAppService {
 	
@@ -17,6 +17,11 @@ public class ServicoFuncionarioAppService {
 		funcionariosRepository.remove(func);
 	}
 	
+        
+        public Funcionario retornaFunionarioPeloLogin(String usuario, String senha) {
+        Funcionario f = new Funcionario();
+        return f;
+    }
 	/*public Funcionario retornaFuncionario(String idFuncionario) {
 		funcionariosRepository.
 	} */

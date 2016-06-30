@@ -1,4 +1,4 @@
-package mercado.entidade;
+package mercado.model.entidade;
 
 public class Vendedor extends Funcionario {
 	private static int geradorDeId = 0;

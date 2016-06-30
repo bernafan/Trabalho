@@ -1,6 +1,6 @@
-package mercado.entidade;
+package mercado.model.entidade;
 
-public abstract class Funcionario {
+public class Funcionario {
 	protected String nome;
 	protected String id;
 	

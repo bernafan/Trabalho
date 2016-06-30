@@ -1,10 +1,10 @@
-package mercado.model;
+package mercado.model.repositories;
 
 import java.util.ArrayList;
 
-import mercado.entidade.Funcionario;
-import mercado.entidade.Gerente;
-import mercado.entidade.Vendedor;
+import mercado.model.entidade.Funcionario;
+//import mercado.model.entidade.Gerente;
+//import mercado.model.entidade.Vendedor;
 
 public class FuncionariosRepository {
 	

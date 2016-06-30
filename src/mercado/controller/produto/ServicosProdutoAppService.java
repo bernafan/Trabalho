@@ -1,22 +1,26 @@
 package mercado.controller.produto;
 
-import mercado.entidade.Produto;
-import mercado.model.EstoqueRepository;
+import mercado.controller.util.ValidacaoDeUsuario;
+import mercado.model.entidade.Produto;
+import mercado.model.repositories.EstoqueRepository;
 
 
 public class ServicosProdutoAppService {
 	
 	 private EstoqueRepository estoque;
+         
+         private ValidacaoDeUsuario validacaoDeUsuario;
 	
-	 public void incluirProduto(String idUsuario, Produto produto) {
-		if (validarUsuario(idUsuario)) {
+	 public void incluirProduto(String idUsuario, Produto produto, double qntProduto) {
+		Item_produto item_produto = new Item_Produto(produto);
+               if (validacaoDeUsuario.validarUsuario(idUsuario)) {
 			estoque.insere(produto);
 		}else
 			System.out.println("Usu�rio n�o pode incluir produto!");
 	 }
 	 
 	 public void removerProduto(String idUsuario, Produto produto) {
-			if (validarUsuario(idUsuario)) {
+			if (validacaoDeUsuario.validarUsuario(idUsuario)) {
 				estoque.remove(produto);
 			}else
 				System.out.println("Usu�rio n�o pode incluir produto!");
@@ -26,10 +30,5 @@ public class ServicosProdutoAppService {
 		return estoque.quantidadeDoProduto(produto);
 	}
 	
-	public boolean validarUsuario(String idUsuario) {
-		if( (!idUsuario.substring(0).toUpperCase().equals('G')) ) {
-			return false;
-		}
-		return true;
-	}
+	
 }
