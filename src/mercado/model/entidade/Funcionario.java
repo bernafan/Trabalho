@@ -1,8 +1,11 @@
 package mercado.model.entidade;
 
-public class Funcionario {
+public abstract class Funcionario {
+
 	protected String nome;
 	protected String id;
+    protected String password;
+    protected boolean status;
 	
 	public String getNome() {
 		return nome;
@@ -15,13 +18,19 @@ public class Funcionario {
 	public String getId() {
 		return this.id;
 	}
+    public String getPassword(){
+        return this.password;
+    }
 	
+    public void setStatus(boolean status){
+        this.status = status;
+    }
+    
+    public boolean getStatus(){
+        return status;
+    }
 	public String toString() {
-        String mensagem;
-        mensagem = ("Nome: " + nome);
-        mensagem += "\nID: " + getId();
-        return mensagem;
+        return "Nome: "+nome+" Id: "+id+" Senha: "+password+"\n";
 	}
-	
 	
 }
