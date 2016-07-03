@@ -56,7 +56,6 @@ public class FuncionariosRepository {
                 Mesma coisa a senha.
              */
             if (fr.get(i).getId().equals(f.getId()) && fr.get(i).getPassword().equals(f.getPassword())) {
-                System.out.println(fr);
                 return true;
 
             }
@@ -73,15 +72,29 @@ public class FuncionariosRepository {
         }
     }
 
-    public void mostrarUsuarioAtual() {
+    //Método troca usuario adicionado
+    public void trocarUsuario(Funcionario f) {
+        //Procurar quem está on e setar false
         for (int i = 0; i < fr.size(); i++) {
             if (fr.get(i).getStatus()) {
-                System.out.println("Usuario Atual: "+fr.get(i).getId());
-            } else {
-                System.out.println("Nenhum usuario logado.");
-
+                fr.get(i).setStatus(false);
             }
         }
 
+        login(f);
+
+    }
+
+    //retorna um funciorio
+    public String mostrarUsuarioAtual() {
+        for (int i = 0; i < fr.size(); i++) {
+            if (fr.get(i).getStatus()) {
+                System.out.println("Usuario Atual: " + fr.get(i).getId());
+                return fr.get(i).getId();
+            }
+        }
+        System.out.println("Nenhum usuario logado.");
+
+        return null;
     }
 }

@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
 
         FuncionariosRepository funcionarios = new FuncionariosRepository();
-     //   ServicoSessao sessao = new ServicoSessao();
-        
+        //   ServicoSessao sessao = new ServicoSessao();
+
         Gerente g1 = new Gerente("Carvalho", "123456");
 
         Vendedor v1 = new Vendedor("Fernandinho", "456123");
@@ -20,24 +20,25 @@ public class Main {
         Vendedor v3 = new Vendedor("Amanda", "789456");
         Vendedor v4 = new Vendedor("Josimar", "753951");
         Vendedor v5 = new Vendedor("Analice", "123234");
-        
-        
-        
+
         funcionarios.insere(v1);
         funcionarios.insere(v2);
         funcionarios.insere(v3);
         funcionarios.insere(v4);
         funcionarios.insere(v5);
         funcionarios.insere(g1);
-        
+
         funcionarios.imprimeFuncionarios();
-        
-        
-        
+
         System.out.println(funcionarios.autenticaUsuario(g1));
-        funcionarios.login(g1);
+        //teste primeiro login
+        funcionarios.login(v1);
         funcionarios.mostrarUsuarioAtual();
-        
+        //teste trocando usuario
+        System.out.println("\nTrocando usuario");
+        funcionarios.trocarUsuario(v5);
+
+        funcionarios.mostrarUsuarioAtual();
 //            Funcionario f1 = new Gerente();
 //            System.out.println(f1);
 //            Funcionario f2 = new Vendedor();
