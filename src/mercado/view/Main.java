@@ -1,16 +1,18 @@
 package mercado.view;
 
 import mercado.controller.ServicoSessao;
+import mercado.controller.funcionario.ControlePersistencia;
 import mercado.model.entidade.Funcionario;
 import mercado.model.entidade.Gerente;
 import mercado.model.entidade.Vendedor;
-import mercado.model.repositories.FuncionariosRepository;
+
+import mercado.controller.funcionario.ServicoFuncionario;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        FuncionariosRepository funcionarios = new FuncionariosRepository();
+        ServicoFuncionario funcionarioService = new ServicoFuncionario();
      //   ServicoSessao sessao = new ServicoSessao();
         
         Gerente g1 = new Gerente("Carvalho", "123456");
@@ -23,20 +25,23 @@ public class Main {
         
         
         
-        funcionarios.insere(v1);
-        funcionarios.insere(v2);
-        funcionarios.insere(v3);
-        funcionarios.insere(v4);
-        funcionarios.insere(v5);
-        funcionarios.insere(g1);
+        funcionarioService.insereFuncionario(v1);
+        funcionarioService.insereFuncionario(v2);
+        funcionarioService.insereFuncionario(v3);
+        funcionarioService.insereFuncionario(v4);
+        funcionarioService.insereFuncionario(v5);
+        funcionarioService.insereFuncionario(g1);
+        funcionarioService.salvaRepositorio();
+        //funcionarioService.imprimeFuncionarios();
         
-        funcionarios.imprimeFuncionarios();
+        
+        //funcionarioService.imprimeFuncionarios();
         
         
         
-        System.out.println(funcionarios.autenticaUsuario(g1));
-        funcionarios.login(g1);
-        funcionarios.mostrarUsuarioAtual();
+        //System.out.println(funcionarios.autenticaUsuario(g1));
+        //funcionarioService.login(g1);
+        //funcionarioService.mostrarUsuarioAtual();
         
 //            Funcionario f1 = new Gerente();
 //            System.out.println(f1);
