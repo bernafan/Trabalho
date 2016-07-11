@@ -14,11 +14,11 @@ public class Sessao {
     private Caixa caixa;
             
     
-    public String getFuncio() {
+    /*public String getFuncio() {
         return this.usuario;
     }
     
     public String getSenha() {
         return this.senha;
-    }
+    }*/
 }
