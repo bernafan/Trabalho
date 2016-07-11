@@ -5,6 +5,7 @@ import mercado.controller.funcionario.ControlePersistencia;
 import mercado.model.entidade.Funcionario;
 import mercado.model.entidade.Gerente;
 import mercado.model.entidade.Vendedor;
+import mercado.model.repositories.FuncionariosRepository;
 
 import mercado.controller.funcionario.ServicoFuncionario;
 
@@ -12,6 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+         FuncionariosRepository funcionarios = new FuncionariosRepository();
         ServicoFuncionario funcionarioService = new ServicoFuncionario();
      //   ServicoSessao sessao = new ServicoSessao();
         
@@ -34,6 +36,7 @@ public class Main {
         funcionarioService.salvaRepositorio();
         //funcionarioService.imprimeFuncionarios();
         
+        funcionarios.imprimeFuncionarios();
         
         //funcionarioService.imprimeFuncionarios();
         
