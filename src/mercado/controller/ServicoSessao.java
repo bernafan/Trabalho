@@ -1,13 +1,13 @@
 package mercado.controller;
 
-import mercado.model.FuncionariosRepository;
+import mercado.model.repositories.FuncionariosRepository;
 
 public class ServicoSessao {
     
-    FuncionariosRepository fr = new FuncionariosRepository();
+    FuncionariosRepository funcionarioRepository = new FuncionariosRepository();
     
     public boolean autenticaUsuario(){
-        
+        return true;
     }
     
 }
