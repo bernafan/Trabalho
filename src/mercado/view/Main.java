@@ -28,17 +28,9 @@ public class Main {
         funcionarios.insere(v5);
         funcionarios.insere(g1);
 
-        funcionarios.imprimeFuncionarios();
-
-        System.out.println(funcionarios.autenticaUsuario(g1));
-        //teste primeiro login
-        funcionarios.login(v1);
-        funcionarios.mostrarUsuarioAtual();
-        //teste trocando usuario
-        System.out.println("\nTrocando usuario");
-        funcionarios.trocarUsuario(v5);
-
-        funcionarios.mostrarUsuarioAtual();
+        Mercado montarTela = new Mercado();
+        montarTela.viewTelaInicial();
+        
 //            Funcionario f1 = new Gerente();
 //            System.out.println(f1);
 //            Funcionario f2 = new Vendedor();
