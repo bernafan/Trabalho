@@ -23,7 +23,7 @@ public class FuncionariosRepository {
         return this.funcionarioRepository;
     }
     public void imprimeFuncionarios() {
-        System.out.println(fr);
+       // System.out.println(fr);
     }
 
     public void setUsuarioAtual(Funcionario f) {
@@ -33,14 +33,14 @@ public class FuncionariosRepository {
     //Função para verificar se o usuario e senha estao no bd
     public boolean autenticaUsuario(Funcionario f) {
         //Percorrendo o arrayList
-        for (int i = 0; i < fr.size(); i++) {
+        for (int i = 0; i < funcionarioRepository.size(); i++) {
 
             /* Pergunta Se o Id da posicao i de um arrayList fr é igual
                 ao Id passado pelo parametro.
                 Mesma coisa a senha.
              */
-            if (fr.get(i).getId().equals(f.getId()) && fr.get(i).getPassword().equals(f.getPassword())) {
-                System.out.println(fr);
+            if (funcionarioRepository.get(i).getId().equals(f.getId()) && funcionarioRepository.get(i).getPassword().equals(f.getPassword())) {
+                System.out.println(funcionarioRepository);
                 return true;
 
             }
