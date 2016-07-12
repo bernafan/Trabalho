@@ -75,15 +75,39 @@ public class FuncionariosRepository {
 
     
 
-    public void mostrarUsuarioAtual() {
+    /*public void mostrarUsuarioAtual() {
         for (int i = 0; i < funcionarioRepository.size(); i++) {
             if (funcionarioRepository.get(i).getStatus()) {
                 System.out.println("Usuario Atual: "+funcionarioRepository.get(i).getId());
             } else {
                 System.out.println("Nenhum usuario logado.");
-
+    //Método troca usuario adicionado
+            }
+        }
+    }*/
+    public void trocarUsuario(Funcionario f) {
+        //Procurar quem está on e setar false
+        for (int i = 0; i < funcionarioRepository.size(); i++) {
+            if (funcionarioRepository.get(i).getStatus()) {
+                funcionarioRepository.get(i).setStatus(false);
             }
         }
 
+        login(f);
+
     }
+
+    //retorna um funciorio
+    public String mostrarUsuarioAtual() {
+        for (int i = 0; i < funcionarioRepository.size(); i++) {
+            if (funcionarioRepository.get(i).getStatus()) {
+                System.out.println("Usuario Atual: " + funcionarioRepository.get(i).getId());
+                return funcionarioRepository.get(i).getId();
+            }
+        }
+        System.out.println("Nenhum usuario logado.");
+
+        return null;
+    }
+
 }

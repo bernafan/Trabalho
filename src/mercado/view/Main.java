@@ -13,7 +13,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-         FuncionariosRepository funcionarios = new FuncionariosRepository();
+        Mercado mercado = new Mercado();
+        mercado.viewTelaInicial();
+        
+        
+        /* FuncionariosRepository funcionarios = new FuncionariosRepository();
         ServicoFuncionario funcionarioService = new ServicoFuncionario();
      //   ServicoSessao sessao = new ServicoSessao();
         
@@ -45,29 +49,6 @@ public class Main {
         //System.out.println(funcionarios.autenticaUsuario(g1));
         //funcionarioService.login(g1);
         //funcionarioService.mostrarUsuarioAtual();
-        
-//            Funcionario f1 = new Gerente();
-//            System.out.println(f1);
-//            Funcionario f2 = new Vendedor();
-//            System.out.println(f2);
-
-    }
-
-    /*
-	
-	public static Funcionario geraGerente(Funcionario f) {
-		Scanner teclado1 = new Scanner(System.in);
-		f = new Gerente();
-		System.out.println("Nome: ");
-		f.setNome(teclado1.next());
-		return f;
-	}
-	
-	public static Funcionario geraVendedor(Funcionario f) {
-		Scanner teclado2 = new Scanner(System.in);	
-		f = new Vendedor();
-		System.out.println("Nome: ");
-		f.setNome(teclado2.next());
-		return f;
-	} */
+        */
+    }    
 }
