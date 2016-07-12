@@ -1,8 +1,6 @@
 package mercado.view;
 
 import java.util.Scanner;
-import java.util.Date;
-//import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import mercado.controller.funcionario.ServicoFuncionario;
@@ -32,6 +30,7 @@ public class Mercado {
                     this.viewTelaInicial();
             }
 	}
+        
 	private void viewConsulta() {
             String consulta = "Exibe a consulta!";//linha que substitui a chamada da função
 
@@ -47,6 +46,7 @@ public class Mercado {
                     this.viewConsulta();
             }
 	}
+        
 	public void viewLogin(){
             String user;
             String senha;
@@ -72,6 +72,7 @@ public class Mercado {
                             this.viewVendaInicial();
             }
 	}
+        
 	public void viewGerente() {
 		System.out.print("\n------------------------------------------------------------");
 		System.out.print("\n--------------------------GERENTE---------------------------");
@@ -99,6 +100,7 @@ public class Mercado {
 		}
 		
 	}
+        
 	private void viewTelaRelatorioVendas() {
                 String dataStr;
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");

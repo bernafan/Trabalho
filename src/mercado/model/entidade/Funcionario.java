@@ -1,6 +1,8 @@
 package mercado.model.entidade;
 
-public class Funcionario {
+import java.io.Serializable;
+
+public class Funcionario implements Serializable {
     protected String nome;
     protected String id;
     protected String password;
@@ -15,7 +17,7 @@ public class Funcionario {
     }
 
     public String getId() {
-            return this.id;
+        return this.id;
     }
     
     public String getPassword(){

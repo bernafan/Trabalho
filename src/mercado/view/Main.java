@@ -13,11 +13,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Mercado mercado = new Mercado();
-        mercado.viewTelaInicial();
+        //Mercado mercado = new Mercado();
+        //mercado.viewTelaInicial();
         
         
-        /* FuncionariosRepository funcionarios = new FuncionariosRepository();
+        FuncionariosRepository funcionarios = new FuncionariosRepository();
         ServicoFuncionario funcionarioService = new ServicoFuncionario();
      //   ServicoSessao sessao = new ServicoSessao();
         
@@ -38,17 +38,12 @@ public class Main {
         funcionarioService.insereFuncionario(v5);
         funcionarioService.insereFuncionario(g1);
         funcionarioService.salvaRepositorio();
-        //funcionarioService.imprimeFuncionarios();
-        
-        funcionarios.imprimeFuncionarios();
-        
-        //funcionarioService.imprimeFuncionarios();
+        funcionarioService.imprimeFuncionarios();
         
         
+        System.out.println(funcionarioService.autenticaUsuario(g1));
+        funcionarioService.login(g1);
+        funcionarioService.mostrarUsuarioAtual();
         
-        //System.out.println(funcionarios.autenticaUsuario(g1));
-        //funcionarioService.login(g1);
-        //funcionarioService.mostrarUsuarioAtual();
-        */
     }    
 }

@@ -1,6 +1,8 @@
 package mercado.model.entidade;
 
-public class Gerente extends Funcionario {
+import java.io.Serializable;
+
+public class Gerente extends Funcionario implements Serializable {
 
     private static int geradorDeId = 0;
 
