@@ -5,43 +5,23 @@
  */
 package mercado.model.entidade;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Leo
  */
-public class Item_Estoque {
+public class Item_Estoque implements Serializable {
     private int id;
     public Produto produto;
-    public double qnt;
-    
-    public Item_Estoque(Produto produto, double qnt){
+  
+    public Item_Estoque(Produto produto) {
         this.produto = produto;
-        this.qnt = qnt;
-        id += 1;
     }
-    
-    public double getQnt() {
-        return this.qnt;
-    }
-    
     public int getId (){
         return id;
     }
-    
-    //função para aumentar a quantidade de um produto (gerente)
-    public String adicionaQnt(int qnt){
-        this.qnt += qnt;
-        return ("Adicionado com Sucesso");
+    public String toString() {
+        return "Nome: " + produto.getNome() + "\n" + "Valor de venda: "+ produto.getValor() + "\n";
     }
-    
-    //função para subtrair uma quantidade de um produto (venda)
-    public String diminueQnt(int qnt){
-        if(this.qnt >= qnt){
-            this.qnt -= qnt; 
-            return ("Operação realizada com Sucesso!");
-        }else{
-            return ("ERRO! Não temos essa qnt.");
-        }
-    }
-
 }

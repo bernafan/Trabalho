@@ -1,16 +1,22 @@
 package mercado.view;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import mercado.controller.estoque.ServicoEstoque;
 import mercado.controller.funcionario.ServicoFuncionario;
+import mercado.model.entidade.Item_Estoque;
+import mercado.model.entidade.Item_Estoque_Peso;
+import mercado.model.entidade.Item_Estoque_Unidade;
+import mercado.model.entidade.Produto;
 
 public class Mercado {
 	private int option;
-        private final Scanner teclado = new Scanner(System.in);
+        private Scanner teclado = new Scanner(System.in);
 	ServicoFuncionario servicosDeFuncionarios = new ServicoFuncionario();
         
-        public void viewTelaInicial(){
+        public void viewTelaInicial() throws IOException, ClassNotFoundException{
             System.out.print("\n------------------------------------------------------------");
             System.out.print("\n--------------------------MERCADO---------------------------");
             System.out.print("\n------------------------------------------------------------");
@@ -31,7 +37,7 @@ public class Mercado {
             }
 	}
         
-	private void viewConsulta() {
+	private void viewConsulta() throws IOException, ClassNotFoundException {
             String consulta = "Exibe a consulta!";//linha que substitui a chamada da função
 
             System.out.print("Insira o código do produto ou 0 para voltar: ");
@@ -47,7 +53,7 @@ public class Mercado {
             }
 	}
         
-	public void viewLogin(){
+	public void viewLogin() throws IOException, ClassNotFoundException{
             String user;
             String senha;
 
@@ -63,17 +69,21 @@ public class Mercado {
             senha = this.teclado.next().trim();
 
             //Pega o user e senha digitados e Loga usuário
-            servicosDeFuncionarios.login(servicosDeFuncionarios.retornaFunionarioPeloLogin(user, senha));
+            //servicosDeFuncionarios.login(servicosDeFuncionarios.retornaFunionarioPeloLogin(user, senha));
             switch (user){
                     case "G":
                             this.viewGerente();
                             break;
                     case "F":
                             this.viewVendaInicial();
+                            break;
+                    default:
+                            System.out.println("Usuario inválido, tente novamente...");
+                            this.viewLogin();
             }
 	}
         
-	public void viewGerente() {
+	public void viewGerente() throws IOException, ClassNotFoundException {
 		System.out.print("\n------------------------------------------------------------");
 		System.out.print("\n--------------------------GERENTE---------------------------");
 		System.out.print("\n------------------------------------------------------------\n");
@@ -101,7 +111,7 @@ public class Mercado {
 		
 	}
         
-	private void viewTelaRelatorioVendas() {
+	private void viewTelaRelatorioVendas() throws IOException, ClassNotFoundException {
                 String dataStr;
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");  
@@ -122,7 +132,7 @@ public class Mercado {
                 this.menuOpcoesRelatorioVendas();
 	}
         
-        private void menuOpcoesRelatorioVendas(){
+        private void menuOpcoesRelatorioVendas() throws IOException, ClassNotFoundException{
                     System.out.print("\nDigite a opção desejada:\n1 - Imprimir novo relatório;\n2 - Tela Gerente\n0 - Sair\n");
                        this.option = this.teclado.nextInt();
 
@@ -147,11 +157,43 @@ public class Mercado {
                 
 		
 	}
-	private void viewTelaInsereEstoque() {
-		// TODO Auto-generated method stub
-		
+	private void viewTelaInsereEstoque() throws IOException, ClassNotFoundException {
+            ServicoEstoque estoqueService = new ServicoEstoque();
+            String nome = null;
+            double valorDeVenda;
+            float custo;
+            
+            System.out.println("Insira o nome do produto:");
+            nome = this.teclado.next();
+            System.out.println("Insira o custo do produto:");
+            custo = this.teclado.nextFloat();
+            System.out.println("Insira o valor de venda do produto:");
+            valorDeVenda = this.teclado.nextDouble();
+            System.out.println("O produto é por peso ou unidade?\nDigite 'P' para peso e 'U' para unidade:\n");
+            String tipoProduto = this.teclado.next();
+            
+            switch(tipoProduto){
+                case "P":
+                    double pesoQnt;
+                    System.out.println("Insira o peso total do produto:");
+                    pesoQnt = this.teclado.nextDouble();
+                    Item_Estoque_Peso itemPeso = 
+                            new Item_Estoque_Peso(new Produto(nome, valorDeVenda, custo) , pesoQnt);
+                    estoqueService.insereNovoItemProduto(itemPeso);
+                    break;
+                case "U":
+                    int unidadeQnt = 0;
+                    System.out.println("Insira a quantidade do produto:");
+                    pesoQnt = this.teclado.nextDouble();
+                    Item_Estoque_Unidade itemUnidade = 
+                            new Item_Estoque_Unidade(new Produto(nome, valorDeVenda, custo), unidadeQnt);
+                    estoqueService.insereNovoItemProduto(itemUnidade);
+                    unidadeQnt = this.teclado.nextInt();
+                    
+                    break;
+            }	
 	}
-	private void viewVendaInicial() {
+	private void viewVendaInicial() throws IOException, ClassNotFoundException {
             System.out.print("\n------------------------------------------------------------");
             System.out.print("\n---------------------------VENDA----------------------------");
             System.out.print("\n------------------------------------------------------------\n");
