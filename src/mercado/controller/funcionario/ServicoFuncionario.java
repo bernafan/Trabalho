@@ -3,6 +3,8 @@ package mercado.controller.funcionario;
 import java.io.IOException;
 import java.util.ArrayList;
 import mercado.model.entidade.Funcionario;
+import mercado.model.entidade.Gerente;
+import mercado.model.entidade.Vendedor;
 import mercado.model.repositories.FuncionariosRepository;
 
 public class ServicoFuncionario {
@@ -80,6 +82,18 @@ public class ServicoFuncionario {
         System.out.println("Nenhum usuario logado.");
 
         return null;
+    }
+    
+    public String retornaTipoFunc(Funcionario f){
+        String tipoUsuario = f.getId().substring(0, 1);
+        
+        if(tipoUsuario.equals("G")){
+            return "G";
+        }else if(tipoUsuario.equals("V")){
+            return "V";
+        }
+        
+        return " ";
     }
 
 	

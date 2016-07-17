@@ -22,7 +22,8 @@ public class Main {
         estoqueService.insereNovoItemProduto(todynho);
         estoqueService.adicionaUnidade(todynho, 2);
         */
-        estoqueService.imprimeProdutos();
+       // estoqueService.imprimeProdutos();
+
         
         Mercado mercado = new Mercado();
         mercado.viewTelaInicial();
