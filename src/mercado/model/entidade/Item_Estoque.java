@@ -22,6 +22,6 @@ public class Item_Estoque implements Serializable {
         return id;
     }
     public String toString() {
-        return "Nome: " + produto.getNome() + "\n" + "Valor de venda: "+ produto.getValor() + "\n";
+        return "\n\nNome: " + produto.getNome() + "\n" + "Valor de venda: "+ produto.getValor() + "\n";
     }
 }

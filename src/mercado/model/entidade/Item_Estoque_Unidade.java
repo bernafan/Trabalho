@@ -29,6 +29,6 @@ public class Item_Estoque_Unidade extends Item_Estoque implements Serializable{
      
     @Override
     public String toString() {
-        return super.toString() + "\nQuantidade: " + qtd; //To change body of generated methods, choose Tools | Templates.
+        return super.toString() + "Quantidade: " + qtd; //To change body of generated methods, choose Tools | Templates.
     }
 }

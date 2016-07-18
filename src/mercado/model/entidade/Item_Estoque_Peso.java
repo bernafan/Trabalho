@@ -29,7 +29,7 @@ public class Item_Estoque_Peso extends Item_Estoque implements Serializable{
 
     @Override
     public String toString() {
-        return super.toString() + "\nQuantidade: " + qtd;
+        return super.toString() + "Quantidade: " + qtd;
     }
     
     

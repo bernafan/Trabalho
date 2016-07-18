@@ -77,7 +77,6 @@ public class Mercado {
         
         
         servicosDeFuncionarios.login(generico);
-        System.out.println("Bernardo viado");
         servicosDeFuncionarios.mostrarUsuarioAtual();
 
         //Retorno do tipo do usuario que foi logado
@@ -165,9 +164,16 @@ public class Mercado {
         }
     }
 
-    private void viewTelaRelatorioEstoque() {
-        // TODO Auto-generated method stub
-
+    private void viewTelaRelatorioEstoque() throws IOException, ClassNotFoundException {
+        ServicoEstoque estoqueService = new ServicoEstoque();
+        estoqueService.imprimeProdutos();
+        
+        System.out.println("\n\nDigite qualquer numero para voltar ao menu gerente: ");
+        this.option = this.teclado.nextInt();
+        switch(option){
+            default: 
+                this.viewGerente();
+        }
     }
 
     private void viewTelaInsereEstoque() throws IOException, ClassNotFoundException {
