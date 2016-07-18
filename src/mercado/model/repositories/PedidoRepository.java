@@ -22,7 +22,7 @@ public class PedidoRepository {
             pedidoRepository.remove(item);
 	}
        
-	public ArrayList retornaRepository() {
+    public ArrayList retornaRepository() {
             this.pedidoRepository = controle.abreArquivo();
             return this.pedidoRepository;
     }

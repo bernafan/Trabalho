@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import mercado.controller.estoque.ServicoEstoque;
 import mercado.controller.funcionario.ServicoFuncionario;
+import mercado.controller.pedido.ServicoPedido;
 import mercado.model.entidade.Funcionario;
 import mercado.model.entidade.Gerente;
 import mercado.model.entidade.Item_Estoque;
@@ -18,7 +19,9 @@ public class Mercado {
     private int option;
     private Scanner teclado = new Scanner(System.in);
     ServicoFuncionario servicosDeFuncionarios = new ServicoFuncionario();
-
+    ServicoPedido servicoPedido = new ServicoPedido();
+    ServicoEstoque servicoEstoque = new ServicoEstoque();
+    
     public void viewTelaInicial() throws IOException, ClassNotFoundException {
         System.out.print("\n------------------------------------------------------------");
         System.out.print("\n--------------------------MERCADO---------------------------");
@@ -41,9 +44,11 @@ public class Mercado {
     }
 
     private void viewConsulta() throws IOException, ClassNotFoundException {
-        String consulta = "Exibe a consulta!";//linha que substitui a chamada da função
-
-        System.out.print("Insira o código do produto ou 0 para voltar: ");
+        String nomeProduto = "Exibe a consulta!";//linha que substitui a chamada da função
+        System.out.print("Insira o nome do produto ou 0 para voltar: ");
+        
+        nomeProduto = this.teclado.next().trim();
+        System.out.println(servicoPedido.retornaProdutoPeloNome(nomeProduto));
         this.option = this.teclado.nextInt();
 
         switch (this.option) {
@@ -51,7 +56,7 @@ public class Mercado {
                 this.viewTelaInicial();
                 break;
             default:
-                System.out.println(consulta);
+                System.out.println(nomeProduto);
                 this.viewConsulta();
         }
     }
@@ -59,7 +64,7 @@ public class Mercado {
     public void viewLogin() throws IOException, ClassNotFoundException {
 
         Funcionario generico = new Funcionario();
-
+       
         String user;
         String senha;
 
@@ -236,20 +241,29 @@ public class Mercado {
         }
     }
 
-    private void viewNovaVenda() {
+    private void viewNovaVenda() throws IOException, ClassNotFoundException {
         String nomeProduto;
-        double preco, qnt;
+        double preco;
+        int qnt;
         System.out.println("Insira o nome/codigo do produto: ");//precisamos definir se vai entrar o nome ou o código
-        nomeProduto = this.teclado.next();
+        nomeProduto = this.teclado.next().trim();
+        Item_Estoque itemEstoque;
+        itemEstoque = servicoPedido.retornaProdutoPeloNome(nomeProduto);
+        System.out.println(itemEstoque.getTipo());
+        System.out.println(itemEstoque);
+        System.out.println("Quantas unidades do produto deseja comprar: ");
+        qnt = teclado.nextInt();
+        servicoEstoque.removeUnidade((Item_Estoque_Unidade) itemEstoque, qnt);
+        
         //verifica se o produto existe
         //imprime o valor do produto
-        preco = 12;
-        System.out.println("Preço: R$" + preco);
-        System.out.println("Insira a quantidade: ");
-        qnt = this.teclado.nextDouble();
+        //preco = 12;
+        //System.out.println("Preço: R$" + preco);
+        //System.out.println("Insira a quantidade: ");
+        //qnt = this.teclado.nextDouble();
         //imprime o subtotal
-        System.out.println("Subtotal: " + (qnt * preco));
-        System.out.println("\nDigite a opção desejada:\n1 - Confirma;\n2 - Cancela\n");
+        //System.out.println("Subtotal: " + (qnt * preco));
+        ///System.out.println("\nDigite a opção desejada:\n1 - Confirma;\n2 - Cancela\n");
         this.option = this.teclado.nextInt();
         switch (this.option) {
             case 1:

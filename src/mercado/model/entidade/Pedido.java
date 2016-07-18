@@ -1,9 +1,10 @@
 package mercado.model.entidade;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 
-public class Pedido {
+public class Pedido implements Serializable{
     private Date data = new Date(System.currentTimeMillis());
     private String usuario;
     private ArrayList <Item_Pedido> itens = new ArrayList<>();

@@ -14,13 +14,19 @@ import java.io.Serializable;
 public class Item_Estoque implements Serializable {
     private int id;
     public Produto produto;
-  
+    
     public Item_Estoque(Produto produto) {
         this.produto = produto;
     }
     public int getId (){
         return id;
     }
+    
+    public String getTipo(){
+        
+        return "0";
+    }
+    
     public String toString() {
         return "\n\nNome: " + produto.getNome() + "\n" + "Valor de venda: "+ produto.getValor() + "\n";
     }

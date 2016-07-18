@@ -6,7 +6,11 @@
 package mercado.controller.pedido;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import mercado.controller.estoque.ServicoEstoque;
+import mercado.model.entidade.Item_Estoque;
 import mercado.model.entidade.Pedido;
+import mercado.model.entidade.Produto;
 import mercado.model.repositories.PedidoRepository;
 
 /**
@@ -16,7 +20,8 @@ import mercado.model.repositories.PedidoRepository;
 public class ServicoPedido {
     
     private PedidoRepository pedidos = new PedidoRepository();
-    
+    ArrayList<Item_Estoque> arrayProdutos = new ArrayList();
+    private ServicoEstoque servicoEstoque = new ServicoEstoque();
    
     public void incluirPedido(Pedido item) {
         pedidos.insere(item);
@@ -30,6 +35,17 @@ public class ServicoPedido {
         System.out.println(pedidos.retornaRepository());
     }
 
+    public Item_Estoque retornaProdutoPeloNome(String nomeProduto) {
+        arrayProdutos = servicoEstoque.retornaRepository();
+        
+        for (int i = 0; i < arrayProdutos.size(); i++) {
+            if(arrayProdutos.get(i).produto.getNome().equals(nomeProduto)) {
+                return arrayProdutos.get(i);
+            }
+        }
+        System.out.println("Produto não encontrado");
+        return null;
+    }
     
     public void salvaNovoRepositorio() {
         pedidos.salvaNovoRepositorio();

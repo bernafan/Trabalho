@@ -18,7 +18,10 @@ public class Item_Estoque_Unidade extends Item_Estoque implements Serializable{
         super(p);
         this.qtd = qtd;
     }
-    
+    @Override
+    public String getTipo(){   
+        return "U";
+    }
     public int getQtd() {
         return this.qtd;
     }

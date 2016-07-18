@@ -32,7 +32,7 @@ public class GeraProdutos {
         
         estoqueService.incluirItemProduto(laranja);
         estoqueService.incluirItemProduto(banana);
-        
+        estoqueService.incluirItemProduto(Todynho);
         estoqueService.salvaNovoRepositorio();
         estoqueService.imprimeProdutos();
     }

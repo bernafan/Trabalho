@@ -1,7 +1,9 @@
 package mercado.model.entidade;
 
+import java.io.Serializable;
 
-public class Item_Pedido {
+
+public class Item_Pedido implements Serializable{
 	private Produto produto;
         private double qntProduto;
         private double subTotal;
@@ -24,6 +26,7 @@ public class Item_Pedido {
             return this.subTotal;
         }
         
+        @Override
         public String toString() {
             return "\n\nProduto: " + produto.getNome() + "\nUnitario: "+ produto.getValor() + "\nSubtotal: " + subTotal;
         }

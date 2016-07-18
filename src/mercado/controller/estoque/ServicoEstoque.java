@@ -6,6 +6,7 @@
 package mercado.controller.estoque;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import mercado.model.entidade.Item_Estoque;
 import mercado.model.entidade.Item_Estoque_Unidade;
 import mercado.model.repositories.EstoqueRepository;
@@ -30,11 +31,14 @@ public class ServicoEstoque {
     public void insereNovoItemProduto(Item_Estoque novoItem) throws IOException, ClassNotFoundException {
         estoque.overwriteRepositorio(novoItem);
     }
+    
     public void imprimeProdutos() {
         System.out.println(estoque.retornaRepository());
     }
 
-    
+    public ArrayList retornaRepository() {
+        return estoque.retornaRepository();
+    }
     public void salvaNovoRepositorio() {
         estoque.salvaNovoRepositorio();
     }
@@ -42,6 +46,9 @@ public class ServicoEstoque {
     
     public void adicionaUnidade(Item_Estoque_Unidade item, int qnt) throws IOException, ClassNotFoundException{
         estoque.addUnidadeNoEstoque(item, qnt);
+    }
+    public void removeUnidade(Item_Estoque_Unidade item, int qnt) throws IOException, ClassNotFoundException{
+        estoque.removeUnidadeNoEstoque(item, qnt);
     }
     
     //função para subtrair uma quantidade de um produto (venda)

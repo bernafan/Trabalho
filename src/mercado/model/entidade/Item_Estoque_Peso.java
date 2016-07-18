@@ -19,6 +19,11 @@ public class Item_Estoque_Peso extends Item_Estoque implements Serializable{
         this.qtd = qtd;
     }
     
+    @Override
+    public String getTipo(){
+        return "P";
+    }
+    
     public double getQtd() {
         return this.qtd;
     }
