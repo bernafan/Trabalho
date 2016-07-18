@@ -41,12 +41,14 @@ public class ServicoFuncionario {
         funcionario.setStatus(true);
     }
 
-    public void login(Funcionario funcionario) {
+    public boolean login(Funcionario funcionario) {
         if (vereficaUsuarioNoRepositorio(funcionario)) {
             funcionario.setStatus(true);
             System.out.println("\nUsuário logado: " + funcionario);
+            return true;
         } else {
             System.out.println("Erro no login");
+            return false;
         }
     }
     public boolean vereficaUsuarioNoRepositorio(Funcionario funcionario) {

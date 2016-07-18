@@ -74,25 +74,27 @@ public class Mercado {
         System.out.print("Senha: ");
         senha = this.teclado.next().trim();
         generico.setPassword(senha);
-        
-        
-        servicosDeFuncionarios.login(generico);
-        servicosDeFuncionarios.mostrarUsuarioAtual();
 
-        //Retorno do tipo do usuario que foi logado
-        String tipoUsuario = servicosDeFuncionarios.retornaTipoFunc(generico);
+        if (servicosDeFuncionarios.login(generico)) {
+            String tipoUsuario = servicosDeFuncionarios.retornaTipoFunc(generico);
 
-        switch (tipoUsuario) {
-            case "G":
-                this.viewGerente();
-                break;
-            case "V":
-                this.viewVendaInicial();
-                break;
-            default:
-                System.out.println("Usuario inválido, tente novamente...");
-                this.viewLogin();
+            switch (tipoUsuario) {
+                case "G":
+                    this.viewGerente();
+                    break;
+                case "V":
+                    this.viewVendaInicial();
+                    break;
+                default:
+                    System.out.println("Usuario inválido, tente novamente...");
+                    this.viewLogin();
+            }
+        }else{
+            this.viewLogin();
+            System.out.println("\n\n");
         }
+        //Retorno do tipo do usuario que foi logado
+
     }
 
     public void viewGerente() throws IOException, ClassNotFoundException {
@@ -167,11 +169,11 @@ public class Mercado {
     private void viewTelaRelatorioEstoque() throws IOException, ClassNotFoundException {
         ServicoEstoque estoqueService = new ServicoEstoque();
         estoqueService.imprimeProdutos();
-        
+
         System.out.println("\n\nDigite qualquer numero para voltar ao menu gerente: ");
         this.option = this.teclado.nextInt();
-        switch(option){
-            default: 
+        switch (option) {
+            default:
                 this.viewGerente();
         }
     }
