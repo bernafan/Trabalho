@@ -241,32 +241,9 @@ public class Mercado {
         }
     }
 
-<<<<<<< HEAD
+
+    
     private void viewNovaVenda() throws IOException, ClassNotFoundException {
-        String nomeProduto;
-        double preco;
-        int qnt;
-        System.out.println("Insira o nome/codigo do produto: ");//precisamos definir se vai entrar o nome ou o código
-        nomeProduto = this.teclado.next().trim();
-        Item_Estoque itemEstoque;
-        itemEstoque = servicoPedido.retornaProdutoPeloNome(nomeProduto);
-        System.out.println(itemEstoque.getTipo());
-        System.out.println(itemEstoque);
-        System.out.println("Quantas unidades do produto deseja comprar: ");
-        qnt = teclado.nextInt();
-        servicoEstoque.removeUnidade((Item_Estoque_Unidade) itemEstoque, qnt);
-        
-        //verifica se o produto existe
-        //imprime o valor do produto
-        //preco = 12;
-        //System.out.println("Preço: R$" + preco);
-        //System.out.println("Insira a quantidade: ");
-        //qnt = this.teclado.nextDouble();
-        //imprime o subtotal
-        //System.out.println("Subtotal: " + (qnt * preco));
-        ///System.out.println("\nDigite a opção desejada:\n1 - Confirma;\n2 - Cancela\n");
-=======
-    private void viewNovaVenda() {
         Pedido novoPedido = new Pedido("usuario");
         this.option = 0;
         do{
@@ -279,17 +256,19 @@ public class Mercado {
         }while(this.option == 2);
         this.tipoPagamento(novoPedido);
         //Jogar o Pedido no Pedido Repository
+        servicoPedido.incluirPedido(novoPedido);
+        
     }
     
-    private Item_Pedido viewNovoItemPedido(){//AQUI PRECISAMOS ALTERAR  O getTipo()
+    private Item_Pedido viewNovoItemPedido() throws IOException, ClassNotFoundException{//AQUI PRECISAMOS ALTERAR  O getTipo()
         String nomeProduto;
         double preco, qntPeso;
         int qntUnidade;
         Item_Estoque novoProduto;
         novoProduto = this.viewConsultaProduto();
         System.out.println("Preço: R$" + novoProduto.produto.getValor());
-        switch(/*novoProduto.getTipo()*/'P'){
-            case 'P':
+        switch(novoProduto.getTipo()){
+            case "P":
                 qntPeso = this.verificaQuantidadePeso((Item_Estoque_Peso) novoProduto);
                 System.out.println("Subtotal: " + (qntPeso * novoProduto.produto.getValor()));
                 System.out.println("\nDigite a opção desejada:\n1 - Confirma;\n2 - Cancela Item\n3 - Cancela Venda");
@@ -297,7 +276,7 @@ public class Mercado {
                 switch (this.option) {
                     case 1:
                         Item_Pedido novoItem = new Item_Pedido(novoProduto.produto, qntPeso);
-                        //subtrai a quantidade do estoque
+                        servicoEstoque.removePeso((Item_Estoque_Peso) novoProduto, qntPeso);
                         return novoItem;
                     case 2:
                         this.viewNovaVenda();
@@ -305,7 +284,7 @@ public class Mercado {
                     case 3:
                         return null;
                 }
-            case 'U':
+            case "U":
                 qntUnidade = this.verificaQuantidadeUnidade((Item_Estoque_Unidade) novoProduto);
                 System.out.println("Subtotal: " + (qntUnidade * novoProduto.produto.getValor()));
                 System.out.println("\nDigite a opção desejada:\n1 - Confirma;\n2 - Cancela Item\n3 - Cancela Venda");
@@ -313,6 +292,7 @@ public class Mercado {
                 switch (this.option) {
                     case 1:
                         Item_Pedido novoItem = new Item_Pedido(novoProduto.produto, qntUnidade);
+                        servicoEstoque.removeUnidade((Item_Estoque_Unidade) novoProduto, qntUnidade);
                         //subtrai a quantidade do estoque
                         return novoItem;
                     case 2:
@@ -352,7 +332,7 @@ public class Mercado {
     
     private void tipoPagamento(Pedido novoPedido){
         System.out.println("Deseja pagar em dinheiro ou cartão?\nDigite 1 para Dinheiro e 2 para Cartão");
->>>>>>> origin/v2
+
         this.option = this.teclado.nextInt();
         switch(this.option){
             case 1:
@@ -381,10 +361,7 @@ public class Mercado {
         Item_Estoque novoProduto;
         System.out.println("Insira o nome do produto: ");
         nomeProduto = this.teclado.next();
-        //procura produto no estoque;
-        //Essas duas linhas abaixo são para testes
-        Produto prod = new Produto("Laranja", 5, 2);
-        novoProduto = new Item_Estoque_Peso(prod, 1000);
+        novoProduto = servicoPedido.retornaProdutoPeloNome(nomeProduto);
         //Essas duas linhas acima são para testes
         if(novoProduto == null){
             System.out.print("Produto não existe, digite novamente");

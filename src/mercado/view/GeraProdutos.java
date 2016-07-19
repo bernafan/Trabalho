@@ -26,14 +26,16 @@ public class GeraProdutos {
         ServicoEstoque estoqueService = new ServicoEstoque();
        
 
-        Item_Estoque laranja = new Item_Estoque_Peso(new Produto("Laranja", 5.00, 2.00), 10);
-        Item_Estoque banana = new Item_Estoque_Peso(new Produto("Banana", 2.00, 1.00), 20);
-        Item_Estoque Todynho = new Item_Estoque_Unidade(new Produto("Todynho", 2.00, 1.00), 20);
+        Item_Estoque laranja = new Item_Estoque_Peso(new Produto("Laranja", 5.00, 2.00), 100);
+        Item_Estoque banana = new Item_Estoque_Peso(new Produto("Banana", 2.50, 1.00), 200);
+        Item_Estoque Todynho = new Item_Estoque_Unidade(new Produto("Todynho", 10.00, 1.00), 300);
+        Item_Estoque Miojo = new Item_Estoque_Unidade(new Produto("Miojo", 3.00, 1.50), 400);
         
         
         estoqueService.incluirItemProduto(laranja);
         estoqueService.incluirItemProduto(banana);
         estoqueService.incluirItemProduto(Todynho);
+        estoqueService.incluirItemProduto(Miojo);
         estoqueService.salvaNovoRepositorio();
         estoqueService.imprimeProdutos();
     }
