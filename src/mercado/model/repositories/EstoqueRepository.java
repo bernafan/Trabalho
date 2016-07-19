@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import mercado.controller.estoque.ControlePersistenciaEstoque;
 import mercado.model.entidade.Item_Estoque;
+import mercado.model.entidade.Item_Estoque_Peso;
 import mercado.model.entidade.Item_Estoque_Unidade;
 
 
@@ -58,6 +59,35 @@ public class EstoqueRepository implements Serializable {
         salvaNovoRepositorio();
    
     }
+    
+    public void addPesoNoEstoque(Item_Estoque_Peso item, double qnt) throws IOException, ClassNotFoundException {
+      this.estoqueRepository = retornaRepository();
+
+        for (int i = 0; i < this.estoqueRepository.size(); i++) {
+            if(this.estoqueRepository.get(i).produto.getNome().equals(item.produto.getNome()))  {
+                item.setQtd(item.getQtd() + qnt);
+                this.estoqueRepository.set(i,item);
+                System.out.println("Quatidade do produto: " + item.produto.getNome()+" é: "+item.getQtd());
+           }
+         }
+        salvaNovoRepositorio();
+   
+    }
+    
+    public void removePesoNoEstoque(Item_Estoque_Peso itemPeso, double qntPeso) throws IOException, ClassNotFoundException {        
+        this.estoqueRepository = retornaRepository();
+
+        for (int i = 0; i < this.estoqueRepository.size(); i++) {
+            if(this.estoqueRepository.get(i).produto.getNome().equals(itemPeso.produto.getNome()))  {
+                itemPeso.setQtd(itemPeso.getQtd() - qntPeso);
+                this.estoqueRepository.set(i,itemPeso);
+                System.out.println("Quatidade do produto: " + itemPeso.produto.getNome()+" é: "+itemPeso.getQtd());
+           }
+         }
+        salvaNovoRepositorio();
+   
+    }
+    
     
     // Só deve ser usada pelas funcoes de add e remove
      public void salvaNovoRepositorio() throws IOException, ClassNotFoundException {
