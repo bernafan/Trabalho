@@ -69,7 +69,7 @@ public class Mercado {
        
         String user;
         String senha;
-
+        int caixa;
         System.out.print("\n------------------------------------------------------------");
         System.out.print("\n---------------------------LOGIN----------------------------");
         System.out.print("\n------------------------------------------------------------\n");
@@ -85,7 +85,7 @@ public class Mercado {
         
         servicosDeFuncionarios.login(generico);
         servicosDeFuncionarios.mostrarUsuarioAtual();
-
+        
         //Retorno do tipo do usuario que foi logado
         String tipoUsuario = servicosDeFuncionarios.retornaTipoFunc(generico);
 
@@ -94,7 +94,9 @@ public class Mercado {
                 this.viewGerente();
                 break;
             case "V":
-                this.viewVendaInicial();
+                System.out.println("\nQual caixa está usando 1, 2, 3, 4, 5 : ");
+                caixa = this.teclado.nextInt();
+                this.viewVendaInicial(generico, caixa);
                 break;
             default:
                 System.out.println("Usuario inválido, tente novamente...");
@@ -138,8 +140,8 @@ public class Mercado {
         System.out.print("\n------------------------------------------------------------");
         System.out.print("\n--------------------RELATÓRIO-DE-VENDAS---------------------");
         System.out.print("\n------------------------------------------------------------\n");
-        System.out.println("Insira a data no formato: dd/mm/aaaa");
-
+        //System.out.println("Insira a data no formato: dd/mm/aaaa");
+        servicoPedido.imprimePedidos();
         dataStr = this.teclado.next();
 
         LocalDate data = LocalDate.parse(dataStr, formato);
@@ -220,7 +222,7 @@ public class Mercado {
         }
     }
 
-    private void viewVendaInicial() throws IOException, ClassNotFoundException {
+    private void viewVendaInicial(Funcionario fResponsavel, int caixa) throws IOException, ClassNotFoundException {
         System.out.print("\n------------------------------------------------------------");
         System.out.print("\n---------------------------VENDA----------------------------");
         System.out.print("\n------------------------------------------------------------\n");
@@ -233,21 +235,21 @@ public class Mercado {
                 this.viewTelaInicial();
                 break;
             case 1:
-                this.viewNovaVenda();
+                this.viewNovaVenda(fResponsavel, caixa);
                 break;
             default:
                 System.out.println("Código inválido");
-                this.viewVendaInicial();
+                this.viewVendaInicial(fResponsavel, caixa);
         }
     }
 
 
     
-    private void viewNovaVenda() throws IOException, ClassNotFoundException {
-        Pedido novoPedido = new Pedido("usuario");
+    private void viewNovaVenda(Funcionario fResponsavel, int caixa) throws IOException, ClassNotFoundException {
+        Pedido novoPedido = new Pedido(fResponsavel, caixa);
         this.option = 0;
         do{
-            novoPedido.insereItemPedido(this.viewNovoItemPedido());
+            novoPedido.insereItemPedido(this.viewNovoItemPedido(fResponsavel, caixa));
             if(novoPedido != null){
                 System.out.println("TOTAL: "+ novoPedido.getTotal());
                 System.out.println("Deseja Finalizar a venda?\nDigite 1 para Sim e 2 para não: ");
@@ -257,10 +259,11 @@ public class Mercado {
         this.tipoPagamento(novoPedido);
         //Jogar o Pedido no Pedido Repository
         servicoPedido.incluirPedido(novoPedido);
+        servicoPedido.salvaNovoRepositorio();
         
     }
     
-    private Item_Pedido viewNovoItemPedido() throws IOException, ClassNotFoundException{//AQUI PRECISAMOS ALTERAR  O getTipo()
+    private Item_Pedido viewNovoItemPedido(Funcionario fResponsavel, int caixa) throws IOException, ClassNotFoundException{//AQUI PRECISAMOS ALTERAR  O getTipo()
         String nomeProduto;
         double preco, qntPeso;
         int qntUnidade;
@@ -279,7 +282,7 @@ public class Mercado {
                         servicoEstoque.removePeso((Item_Estoque_Peso) novoProduto, qntPeso);
                         return novoItem;
                     case 2:
-                        this.viewNovaVenda();
+                        this.viewNovaVenda(fResponsavel, caixa);
                         break;
                     case 3:
                         return null;
@@ -296,7 +299,7 @@ public class Mercado {
                         //subtrai a quantidade do estoque
                         return novoItem;
                     case 2:
-                        this.viewNovaVenda();
+                        this.viewNovaVenda(fResponsavel, caixa);
                         break;
                     case 3:
                         return null;
