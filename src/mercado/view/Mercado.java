@@ -65,7 +65,7 @@ public class Mercado {
 
     public void viewLogin() throws IOException, ClassNotFoundException {
 
-        Funcionario generico = new Funcionario();
+        Funcionario funcAtual = new Funcionario();
        
         String user;
         String senha;
@@ -76,18 +76,18 @@ public class Mercado {
         System.out.print("\nUsuário: ");
 
         user = this.teclado.next().trim();
-        generico.setId(user);
+        funcAtual.setId(user);
 
         System.out.print("Senha: ");
         senha = this.teclado.next().trim();
-        generico.setPassword(senha);
+        funcAtual.setPassword(senha);
         
         
-        servicosDeFuncionarios.login(generico);
-        servicosDeFuncionarios.mostrarUsuarioAtual();
+        servicosDeFuncionarios.login(funcAtual);
+        
         
         //Retorno do tipo do usuario que foi logado
-        String tipoUsuario = servicosDeFuncionarios.retornaTipoFunc(generico);
+        String tipoUsuario = servicosDeFuncionarios.retornaTipoFunc(funcAtual);
 
         switch (tipoUsuario) {
             case "G":
@@ -96,7 +96,7 @@ public class Mercado {
             case "V":
                 System.out.println("\nQual caixa está usando 1, 2, 3, 4, 5 : ");
                 caixa = this.teclado.nextInt();
-                this.viewVendaInicial(generico, caixa);
+                this.viewVendaInicial(funcAtual, caixa);
                 break;
             default:
                 System.out.println("Usuario inválido, tente novamente...");

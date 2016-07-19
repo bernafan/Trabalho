@@ -40,7 +40,7 @@ public class ServicoPedido {
         arrayProdutos = servicoEstoque.retornaRepository();
         
         for (int i = 0; i < arrayProdutos.size(); i++) {
-            if(arrayProdutos.get(i).produto.getNome().equals(nomeProduto)) {
+            if(arrayProdutos.get(i).produto.getNome().compareToIgnoreCase(nomeProduto)==0) {
                 return arrayProdutos.get(i);
             }
         }
