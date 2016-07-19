@@ -11,6 +11,8 @@ import mercado.model.entidade.Gerente;
 import mercado.model.entidade.Item_Estoque;
 import mercado.model.entidade.Item_Estoque_Peso;
 import mercado.model.entidade.Item_Estoque_Unidade;
+import mercado.model.entidade.Item_Pedido;
+import mercado.model.entidade.Pedido;
 import mercado.model.entidade.Produto;
 
 public class Mercado {
@@ -74,27 +76,25 @@ public class Mercado {
         System.out.print("Senha: ");
         senha = this.teclado.next().trim();
         generico.setPassword(senha);
+        
+        
+        servicosDeFuncionarios.login(generico);
+        servicosDeFuncionarios.mostrarUsuarioAtual();
 
-        if (servicosDeFuncionarios.login(generico)) {
-            String tipoUsuario = servicosDeFuncionarios.retornaTipoFunc(generico);
-
-            switch (tipoUsuario) {
-                case "G":
-                    this.viewGerente();
-                    break;
-                case "V":
-                    this.viewVendaInicial();
-                    break;
-                default:
-                    System.out.println("Usuario inválido, tente novamente...");
-                    this.viewLogin();
-            }
-        }else{
-            this.viewLogin();
-            System.out.println("\n\n");
-        }
         //Retorno do tipo do usuario que foi logado
+        String tipoUsuario = servicosDeFuncionarios.retornaTipoFunc(generico);
 
+        switch (tipoUsuario) {
+            case "G":
+                this.viewGerente();
+                break;
+            case "V":
+                this.viewVendaInicial();
+                break;
+            default:
+                System.out.println("Usuario inválido, tente novamente...");
+                this.viewLogin();
+        }
     }
 
     public void viewGerente() throws IOException, ClassNotFoundException {
@@ -169,11 +169,11 @@ public class Mercado {
     private void viewTelaRelatorioEstoque() throws IOException, ClassNotFoundException {
         ServicoEstoque estoqueService = new ServicoEstoque();
         estoqueService.imprimeProdutos();
-
+        
         System.out.println("\n\nDigite qualquer numero para voltar ao menu gerente: ");
         this.option = this.teclado.nextInt();
-        switch (option) {
-            default:
+        switch(option){
+            default: 
                 this.viewGerente();
         }
     }
@@ -237,39 +237,128 @@ public class Mercado {
     }
 
     private void viewNovaVenda() {
-        String nomeProduto;
-        double preco, qnt;
-        System.out.println("Insira o nome/codigo do produto: ");//precisamos definir se vai entrar o nome ou o código
-        nomeProduto = this.teclado.next();
-        //verifica se o produto existe
-        //imprime o valor do produto
-        preco = 12;
-        System.out.println("Preço: R$" + preco);
-        System.out.println("Insira a quantidade: ");
-        qnt = this.teclado.nextDouble();
-        //imprime o subtotal
-        System.out.println("Subtotal: " + (qnt * preco));
-        System.out.println("\nDigite a opção desejada:\n1 - Confirma;\n2 - Cancela\n");
-        this.option = this.teclado.nextInt();
-        switch (this.option) {
-            case 1:
-                //salva as informações em um novo item de venda
-                break;
-            case 2:
-                this.viewNovaVenda();
-                break;
-        }
-        System.out.println("\nDigite a opção desejada:\n1 - Novo Item;\n2 - Finaliza Venda\n");
-        this.option = this.teclado.nextInt();
-
-        switch (option) {
-            case 1:
-                this.viewNovaVenda();
-                break;
-            case 2:
-                //Venda Cartão
-                System.out.println("Imprime venda cartão/dinheiro");
-            //Salva o pedido
+        Pedido novoPedido = new Pedido("usuario");
+        this.option = 0;
+        do{
+            novoPedido.insereItemPedido(this.viewNovoItemPedido());
+            if(novoPedido != null){
+                System.out.println("TOTAL: "+ novoPedido.getTotal());
+                System.out.println("Deseja Finalizar a venda?\nDigite 1 para Sim e 2 para não: ");
+                this.option = this.teclado.nextInt();
             }
+        }while(this.option == 2);
+        this.tipoPagamento(novoPedido);
+        //Jogar o Pedido no Pedido Repository
+    }
+    
+    private Item_Pedido viewNovoItemPedido(){//AQUI PRECISAMOS ALTERAR  O getTipo()
+        String nomeProduto;
+        double preco, qntPeso;
+        int qntUnidade;
+        Item_Estoque novoProduto;
+        novoProduto = this.viewConsultaProduto();
+        System.out.println("Preço: R$" + novoProduto.produto.getValor());
+        switch(/*novoProduto.getTipo()*/'P'){
+            case 'P':
+                qntPeso = this.verificaQuantidadePeso((Item_Estoque_Peso) novoProduto);
+                System.out.println("Subtotal: " + (qntPeso * novoProduto.produto.getValor()));
+                System.out.println("\nDigite a opção desejada:\n1 - Confirma;\n2 - Cancela Item\n3 - Cancela Venda");
+                this.option = this.teclado.nextInt();
+                switch (this.option) {
+                    case 1:
+                        Item_Pedido novoItem = new Item_Pedido(novoProduto.produto, qntPeso);
+                        //subtrai a quantidade do estoque
+                        return novoItem;
+                    case 2:
+                        this.viewNovaVenda();
+                        break;
+                    case 3:
+                        return null;
+                }
+            case 'U':
+                qntUnidade = this.verificaQuantidadeUnidade((Item_Estoque_Unidade) novoProduto);
+                System.out.println("Subtotal: " + (qntUnidade * novoProduto.produto.getValor()));
+                System.out.println("\nDigite a opção desejada:\n1 - Confirma;\n2 - Cancela Item\n3 - Cancela Venda");
+                this.option = this.teclado.nextInt();
+                switch (this.option) {
+                    case 1:
+                        Item_Pedido novoItem = new Item_Pedido(novoProduto.produto, qntUnidade);
+                        //subtrai a quantidade do estoque
+                        return novoItem;
+                    case 2:
+                        this.viewNovaVenda();
+                        break;
+                    case 3:
+                        return null;
+                }
+            default:
+                return null;
+        }
+    }
+    
+    private double verificaQuantidadePeso(Item_Estoque_Peso novoProduto){
+        double qntPeso;
+        System.out.println("Insira a quantidade em kg:");
+        qntPeso = this.teclado.nextDouble();
+        if(qntPeso<=novoProduto.getQtd()){
+            return qntPeso;
+        }else{
+            System.out.println("A quantidade excede o estoque, tente novamente.");
+            return this.verificaQuantidadePeso(novoProduto);
+        }
+    }
+    
+    private int verificaQuantidadeUnidade(Item_Estoque_Unidade novoProduto){
+        int qntUnidade;
+        System.out.println("Insira a quantidade:");
+        qntUnidade = this.teclado.nextInt();
+        if(qntUnidade<=novoProduto.getQtd()){
+            return qntUnidade;
+        }else{
+            System.out.println("A quantidade excede o estoque, tente novamente.");
+            return this.verificaQuantidadeUnidade(novoProduto);
+        }
+    }
+    
+    private void tipoPagamento(Pedido novoPedido){
+        System.out.println("Deseja pagar em dinheiro ou cartão?\nDigite 1 para Dinheiro e 2 para Cartão");
+        this.option = this.teclado.nextInt();
+        switch(this.option){
+            case 1:
+                pagamentoDinheiro(novoPedido.getTotal());
+                break;
+            case 2:
+                System.out.println("Obrigado!");
+                break;
+            default:
+                System.out.println("Opção inválida, tente novamente.");
+                this.tipoPagamento(novoPedido);
+        }
+    }
+    
+    private void pagamentoDinheiro(double total){
+        double pagamento;
+        System.out.println("Insira o valor para pagamento em R$: ");
+        pagamento = this.teclado.nextDouble();
+        if(pagamento >= total){
+            System.out.println("Troco: " + (pagamento - total) + "\nObrigado!");
+        }
+    }
+    
+    private Item_Estoque viewConsultaProduto(){
+        String nomeProduto;
+        Item_Estoque novoProduto;
+        System.out.println("Insira o nome do produto: ");
+        nomeProduto = this.teclado.next();
+        //procura produto no estoque;
+        //Essas duas linhas abaixo são para testes
+        Produto prod = new Produto("Laranja", 5, 2);
+        novoProduto = new Item_Estoque_Peso(prod, 1000);
+        //Essas duas linhas acima são para testes
+        if(novoProduto == null){
+            System.out.print("Produto não existe, digite novamente");
+            return this.viewConsultaProduto();
+        }
+        return novoProduto;
     }
 }

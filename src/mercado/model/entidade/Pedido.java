@@ -14,7 +14,12 @@ public class Pedido {
     }
     
     public void insereItemPedido(Item_Pedido item){
+        itens.add(item);
         this.total += item.getSubTotal();
+    }
+    
+    public double getTotal(){
+        return this.total;
     }
     
     @Override
