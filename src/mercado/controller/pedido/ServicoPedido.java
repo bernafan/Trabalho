@@ -8,6 +8,7 @@ package mercado.controller.pedido;
 import java.io.IOException;
 import java.util.ArrayList;
 import mercado.controller.estoque.ServicoEstoque;
+import mercado.model.entidade.Funcionario;
 import mercado.model.entidade.Item_Estoque;
 import mercado.model.entidade.Pedido;
 import mercado.model.entidade.Produto;

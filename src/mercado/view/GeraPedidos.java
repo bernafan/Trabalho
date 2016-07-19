@@ -5,7 +5,9 @@
  */
 package mercado.view;
 
+import mercado.controller.funcionario.ServicoFuncionario;
 import mercado.controller.pedido.ServicoPedido;
+import mercado.model.entidade.Funcionario;
 
 import mercado.model.entidade.Item_Estoque;
 import mercado.model.entidade.Item_Estoque_Peso;
@@ -24,9 +26,10 @@ public class GeraPedidos {
        
         PedidoRepository pedidos = new PedidoRepository();
         ServicoPedido pedidoService = new ServicoPedido();
-       
-
-        Pedido novoPedido = new Pedido ("Teste");
+        ServicoFuncionario servicoFunc = new ServicoFuncionario();
+        Funcionario funcionario = new Funcionario();
+        funcionario = servicoFunc.retornaFunionarioPeloLogin("G1", "123");
+        Pedido novoPedido = new Pedido (funcionario, 2);
         
         pedidoService.incluirPedido(novoPedido);
         
