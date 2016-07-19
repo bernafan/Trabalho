@@ -13,13 +13,7 @@ public class EstoqueRepository implements Serializable {
 	
 	public ArrayList<Item_Estoque> estoqueRepository = new ArrayList();
 	ControlePersistenciaEstoque controle= new ControlePersistenciaEstoque(this.estoqueRepository);
-        
-        
-        
-        public void salvaNovoRepositorio() {
-           controle = new ControlePersistenciaEstoque(this.estoqueRepository);
-            controle.salvaNovoArquivo();
-        }
+       
         
 	public void insere(Item_Estoque item) {
             estoqueRepository.add(item);
@@ -28,51 +22,48 @@ public class EstoqueRepository implements Serializable {
 	public void remove(Item_Estoque item){	
             estoqueRepository.remove(item);
 	}
-       
-	public ArrayList retornaRepository() {
+    public ArrayList retornaRepository() {
             this.estoqueRepository = controle.abreArquivo();
             return this.estoqueRepository;
     }
         
         
-    public void overwriteRepositorio(Item_Estoque novoItem) throws IOException, ClassNotFoundException {
-        controle.overwriteArquivo(novoItem);
+    public void insereNovoItemRepositorio(Item_Estoque novoItem) throws IOException, ClassNotFoundException {
+        controle.insereNovoItemArquivo(novoItem);
     }
 
     public void addUnidadeNoEstoque(Item_Estoque_Unidade itemUnidade, int qnt) throws IOException, ClassNotFoundException {
-        ArrayList<Item_Estoque> novoEstoqueRepository = new ArrayList();
-        novoEstoqueRepository = retornaRepository();
-        
-        for (int i = 0; i < novoEstoqueRepository.size(); i++) {
-            if(novoEstoqueRepository.get(i).getId() == itemUnidade.getId()) {
+      this.estoqueRepository = retornaRepository();
+
+        for (int i = 0; i < this.estoqueRepository.size(); i++) {
+            if(this.estoqueRepository.get(i).produto.getNome().equals(itemUnidade.produto.getNome()))  {
                 itemUnidade.setQtd(itemUnidade.getQtd() + qnt);
-                novoEstoqueRepository.add(i,itemUnidade);
-                this.estoqueRepository.clear();
-                this.estoqueRepository.addAll(novoEstoqueRepository);
+                this.estoqueRepository.set(i,itemUnidade);
                 System.out.println("Quatidade do produto: " + itemUnidade.produto.getNome()+" é: "+itemUnidade.getQtd());
-                controle.salvaNovoArquivo();
-                break;
-            }
-        }
+           }
+         }
+        salvaNovoRepositorio();
+   
     }
     public void removeUnidadeNoEstoque(Item_Estoque_Unidade itemUnidade, int qnt) throws IOException, ClassNotFoundException {        
-         ArrayList<Item_Estoque> novoEstoqueRepository = new ArrayList();
-         novoEstoqueRepository = retornaRepository(); 
-         novoEstoqueRepository.clear();
-         novoEstoqueRepository.addAll(retornaRepository());
-         System.out.println(novoEstoqueRepository);
-         
-         itemUnidade.setQtd(itemUnidade.getQtd() - qnt);
-         System.out.println("Qnt do item" + itemUnidade.getQtd());
-         for (int i = 0; i < novoEstoqueRepository.size(); i++) {
-           if (novoEstoqueRepository.get(i).equals(itemUnidade)) {
-               novoEstoqueRepository.remove(i);
-               novoEstoqueRepository.add(itemUnidade);
+        this.estoqueRepository = retornaRepository();
+
+        for (int i = 0; i < this.estoqueRepository.size(); i++) {
+            if(this.estoqueRepository.get(i).produto.getNome().equals(itemUnidade.produto.getNome()))  {
+                itemUnidade.setQtd(itemUnidade.getQtd() - qnt);
+                this.estoqueRepository.set(i,itemUnidade);
+                System.out.println("Quatidade do produto: " + itemUnidade.produto.getNome()+" é: "+itemUnidade.getQtd());
            }
-           estoqueRepository.addAll(novoEstoqueRepository);
-           salvaNovoRepositorio();
          }
-         System.out.println("Novo repo"+ estoqueRepository);
+        salvaNovoRepositorio();
+   
     }
+    
+    // Só deve ser usada pelas funcoes de add e remove
+     public void salvaNovoRepositorio() throws IOException, ClassNotFoundException {
+            controle = new ControlePersistenciaEstoque(this.estoqueRepository);
+            System.out.println("Funcao salva " + this.estoqueRepository);
+            controle.salvaArrayNoArquivo();
+        }
     
 }

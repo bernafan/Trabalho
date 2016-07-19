@@ -29,7 +29,7 @@ public class ServicoEstoque {
     }
     
     public void insereNovoItemProduto(Item_Estoque novoItem) throws IOException, ClassNotFoundException {
-        estoque.overwriteRepositorio(novoItem);
+        estoque.insereNovoItemRepositorio(novoItem);
     }
     
     public void imprimeProdutos() {
@@ -39,7 +39,8 @@ public class ServicoEstoque {
     public ArrayList retornaRepository() {
         return estoque.retornaRepository();
     }
-    public void salvaNovoRepositorio() {
+    
+    public void salvaNovoRepositorio() throws IOException, ClassNotFoundException {
         estoque.salvaNovoRepositorio();
     }
 	

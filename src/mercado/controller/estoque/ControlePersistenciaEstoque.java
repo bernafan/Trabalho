@@ -48,12 +48,17 @@ public class ControlePersistenciaEstoque {
         return this.arrayDeRetorno;
     }
      
-     public void overwriteArquivo(Item_Estoque novoItem) throws IOException,
+     public void insereNovoItemArquivo(Item_Estoque novoItem) throws IOException,
             ClassNotFoundException {
         
         this.produtos.clear();
         this.produtos.addAll(abreArquivo());
         this.produtos.add(novoItem);
+        salvaNovoArquivo();
+    }
+     
+      public void salvaArrayNoArquivo() throws IOException,
+            ClassNotFoundException {
         salvaNovoArquivo();
     }
      
@@ -65,5 +70,9 @@ public class ControlePersistenciaEstoque {
         } catch (IOException ex) {
             Logger.getLogger(ControlePersistenciaEstoque.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void salvaNovoArquivo2(ArrayList<Item_Estoque> novoRepository) {
+        
     }
 }

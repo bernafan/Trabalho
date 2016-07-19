@@ -5,6 +5,7 @@
  */
 package mercado.view;
 
+import java.io.IOException;
 import mercado.controller.estoque.ServicoEstoque;
 
 import mercado.model.entidade.Item_Estoque;
@@ -19,7 +20,7 @@ import mercado.model.repositories.EstoqueRepository;
  * @author Bernardo
  */
 public class GeraProdutos {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
        
         EstoqueRepository estoque = new EstoqueRepository();
         ServicoEstoque estoqueService = new ServicoEstoque();
