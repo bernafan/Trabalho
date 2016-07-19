@@ -20,11 +20,11 @@ public class GeraFuncionarios {
 
         ServicoFuncionario funcionarioService = new ServicoFuncionario();
 
-        Gerente g1 = new Gerente("Carvalho", "123456");
+        Gerente g1 = new Gerente("Carvalho", "123");
 
-        Vendedor v1 = new Vendedor("Fernandinho", "456123");
-        Vendedor v2 = new Vendedor("Marilsa", "789654");
-        Vendedor v3 = new Vendedor("Amanda", "789456");
+        Vendedor v1 = new Vendedor("Fernandinho", "123");
+        Vendedor v2 = new Vendedor("Marilsa", "456");
+        Vendedor v3 = new Vendedor("Amanda", "789");
 
         funcionarioService.insereFuncionario(v1);
         funcionarioService.insereFuncionario(v2);
