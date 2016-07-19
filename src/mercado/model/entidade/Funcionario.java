@@ -12,6 +12,14 @@ public class Funcionario implements Serializable {
             return nome;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setNome(String nome) {
             this.nome = nome;
     }
@@ -33,7 +41,7 @@ public class Funcionario implements Serializable {
     }
     
     public String toString() {
-    return "Nome: "+nome+" Id: "+id +"\n";
+    return "Nome: "+this.nome+" Id: "+id +"\n";
     }
 	
 }

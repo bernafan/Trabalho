@@ -3,10 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/nbproject/private/private.properties</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/model/entidade/Item_Estoque_Peso.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/view/GeraProdutos.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/view/GeraFuncionarios.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/model/repositories/EstoqueRepository.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/model/entidade/Item_Estoque.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/model/entidade/Produto.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/controller/funcionario/ServicoFuncionario.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/view/Mercado.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/controller/estoque/ServicoEstoque.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/controller/funcionario/ControlePersistenciaFuncionarios.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/controller/estoque/ControlePersistenciaEstoque.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/model/repositories/FuncionariosRepository.java</file>
+            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/model/entidade/Item_Estoque_Unidade.java</file>
         </group>
         <group>
-            <file>file:/Users/Bernardo/Dropbox/Developer/POO/Trabalho/src/mercado/view/Mercado.java</file>
+            <file>file:/C:/Users/felip/Desktop/Trabalho/src/mercado/controller/funcionario/ControlePersistenciaFuncionarios.java</file>
+            <file>file:/C:/Users/felip/Desktop/Trabalho/src/mercado/view/Mercado.java</file>
+            <file>file:/C:/Users/felip/Desktop/Trabalho/src/mercado/model/repositories/FuncionariosRepository.java</file>
+            <file>file:/C:/Users/felip/Desktop/Trabalho/src/mercado/controller/funcionario/ServicoFuncionario.java</file>
+            <file>file:/C:/Users/felip/Desktop/Trabalho/src/mercado/view/Main.java</file>
+            <file>file:/C:/Users/felip/Desktop/Trabalho/src/mercado/view/GeraFuncionarios.java</file>
         </group>
     </open-files>
 </project-private>

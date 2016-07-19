@@ -1,20 +1,25 @@
 package mercado.model.entidade;
 
-public class Produto  {
-	private String nome;
-	private double valorDeVenda;
+import java.io.Serializable;
+
+public class Produto implements Serializable {
+    private String nome;
+    private double valorDeVenda;
     private double custo;
     private static int geradorDeId;
     private String id;
     
-    public Produto() {
+    public Produto(String nome, double valorDeVenda, double custo) {
+        this.nome = nome;
+        this.valorDeVenda = valorDeVenda;
+        this.custo = custo;
     	Produto.geradorDeId++;
         this.setId("P" + geradorDeId);
     }
     
     public String getId() {
-		return id;
-	}
+        return id;
+    }
     
     public String getNome(){
         return this.nome;
@@ -45,10 +50,8 @@ public class Produto  {
 	}
 
 	public String toString() {
-        String mensagem;
-        mensagem = ("Nome: " + nome);
-        mensagem += "\nValor: " + valorDeVenda;
-        return mensagem;
+        
+        return "Nome: " + nome + "\nValor: " + this.valorDeVenda+ "\n";
  
 	}
 }

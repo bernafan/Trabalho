@@ -1,25 +1,29 @@
 package mercado.model.entidade;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Pedido {
-	private static int GeradorDeCodigo = 0;
-	private int id;
-	private Item_Pedido[] itens;
-	 
-	public Pedido() {
-		GeradorDeCodigo++;
-		id = GeradorDeCodigo;
-	}
-	public int getId() {
-		return id;
-	}
-	
-	public Item_Pedido[] getItens() {
-		return itens;
-	}
-	public void setItens(Item_Pedido[] itens) {
-		this.itens = itens;
-	}
-	    
-	 
+    private Date data = new Date(System.currentTimeMillis());
+    private String usuario;
+    private ArrayList <Item_Pedido> itens = new ArrayList<>();
+    private double total = 0;
+    
+    public Pedido (String usuario){
+        this.usuario = usuario;
+    }
+    
+    public void insereItemPedido(Item_Pedido item){
+        itens.add(item);
+        this.total += item.getSubTotal();
+    }
+    
+    public double getTotal(){
+        return this.total;
+    }
+    
+    @Override
+    public String toString() {
+        return "\n\nDia: " + data.toString() + "\nCaixa: " + usuario + itens.toString() + "\nTOTAL: R$ " + total;
+    }
 }
