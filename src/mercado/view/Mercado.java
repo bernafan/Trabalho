@@ -260,7 +260,7 @@ public class Mercado {
         //Jogar o Pedido no Pedido Repository
         servicoPedido.incluirPedido(novoPedido);
         servicoPedido.salvaNovoRepositorio();
-        
+        this.viewVendaInicial(fResponsavel, caixa);
     }
     
     private Item_Pedido viewNovoItemPedido(Funcionario fResponsavel, int caixa) throws IOException, ClassNotFoundException{//AQUI PRECISAMOS ALTERAR  O getTipo()
